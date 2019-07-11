@@ -1,7 +1,14 @@
 #!/usr/bin/env groovy
 
-node {
-  git(url: "https://github.com/dsirine/node-app.git", branch: "${ghprbSourceBranch}")
-  sh "npm install"
-  sh "npm test"
-}
+pipeline {
+    agent any 
+    stages {
+        stage('Unit Test') {
+            steps {
+                git(url: "https://github.com/dsirine/node-app.git", branch: "${ghprbSourceBranch}")
+                sh "npm install"
+                sh "npm test"
+            }
+        }
+    }
+
